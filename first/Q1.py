@@ -133,13 +133,22 @@ def main():
     img2 = cv2.imread('./transformed_image.jpg', cv2.IMREAD_GRAYSCALE)
     h, w = img1.shape
 
+    # T1
     reflected_image = apply_reflection(img1)
+
+    # T2
     sheared_image = apply_shear_transformation(reflected_image, shx=0, shy=0.6)
+
+    # T3
     resized_h_image = scale_image_horizontal(sheared_image, (0.93, 1.79))
+
+    # T4
     affine_image = apply_affine_transformation(resized_h_image, angle = -11.5, scale = 0.2, tx=0, ty=0)
-    # moved_image = move_image(affine_image, tx=-160, ty=350, cols=w, rows=h)
+
+    # T5
     moved_image = move_image(affine_image, tx=-73.5   , ty=375, cols=w, rows=h)
-    # sheared_image = apply_shear_transformation(moved_image, shx=0.5, shy=0)
+
+
     compare1 = bitwise_or_images(img2, moved_image)
     compare2 = bitwise_or_images(moved_image, img2)
 
@@ -147,8 +156,6 @@ def main():
 
     cv2.imshow("comp1 image", compare1)
     cv2.imshow("comp2 image", compare2)
-    # cv2.imshow("Transformed image", sheared_image)
-    # cv2.imshow("test image", img2)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
