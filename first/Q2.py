@@ -99,8 +99,8 @@ def T5(image):
     # Normalize the pixel values to the range [0, 1]
     normalized_image = image / 255.0
     
-    # Apply the "2th power" transformation (square the pixel values)
-    transformed_image = np.power(normalized_image, 2)
+    # Apply the "2th root" transformation (square root of the pixel values)
+    transformed_image = np.sqrt(normalized_image)
     
     # Scale the transformed image back to the range [0, 255]
     scaled_transformed_image = np.uint8(transformed_image * 255)
@@ -112,13 +112,16 @@ def T6(image):
     # Normalize the pixel values to the range [0, 1]
     normalized_image = image / 255.0
     
-    # Apply the "2th root" transformation (square root of the pixel values)
-    transformed_image = np.sqrt(normalized_image)
+    # Apply the "2th power" transformation (square the pixel values)
+    transformed_image = np.power(normalized_image, 2)
     
     # Scale the transformed image back to the range [0, 255]
     scaled_transformed_image = np.uint8(transformed_image * 255)
 
     return scaled_transformed_image
+
+
+
 
 
 image = cv2.imread('image1.jfif', cv2.IMREAD_GRAYSCALE)
