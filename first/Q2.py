@@ -122,8 +122,6 @@ def T6(image):
 
 
 
-
-
 image = cv2.imread('image1.jfif', cv2.IMREAD_GRAYSCALE)
 
 images = {
