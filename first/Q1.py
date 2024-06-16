@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
 
 def find_biggest_contour_corners(image):
@@ -153,12 +154,69 @@ def main():
     compare2 = bitwise_or_images(moved_image, img2)
 
 
+    # Display the results
+    plt.figure(figsize=(12, 8))
 
-    cv2.imshow("comp1 image", compare1)
-    cv2.imshow("comp2 image", compare2)
+    plt.subplot(2, 3, 1)
+    plt.imshow(img1, cmap='gray')
+    plt.title('Original image')
+    plt.axis('off')
 
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+    plt.subplot(2, 3, 2)
+    plt.imshow(reflected_image, cmap='gray')
+    plt.title('Reflected image')
+    plt.axis('off')
+
+    plt.subplot(2, 3, 3)
+    plt.imshow(sheared_image, cmap='gray')
+    plt.title('Sheared image')
+    plt.axis('off')
+
+    plt.subplot(2, 3, 4)
+    plt.imshow(resized_h_image, cmap='gray')
+    plt.title('Resized h image')
+    plt.axis('off')
+
+    plt.subplot(2, 3, 5)
+    plt.imshow(affine_image, cmap='gray')
+    plt.title('affine image')
+    plt.axis('off')
+
+    plt.subplot(2, 3, 6)
+    plt.imshow(moved_image, cmap='gray')
+    plt.title('Moved image')
+    plt.axis('off')
+
+    plt.tight_layout()
+    plt.show()
+
+    
+    # Create a figure with 2 rows and 3 columns
+    plt.figure(figsize=(12, 8))
+
+    plt.subplot(2, 2, 1)
+    plt.imshow(moved_image, cmap='gray')
+    plt.title('Result')
+    plt.axis('off')
+
+    plt.subplot(2, 2, 2)
+    plt.imshow(img2, cmap='gray')
+    plt.title('Test')
+    plt.axis('off')
+
+    plt.subplot(2, 2, 3)
+    plt.imshow(compare1, cmap='gray')
+    plt.title('Test & (~Result)')
+    plt.axis('off')
+
+    plt.subplot(2, 2, 4)
+    plt.imshow(compare2, cmap='gray')
+    plt.title('Result & (~Test)')
+    plt.axis('off')
+
+    # Adjust layout
+    plt.tight_layout()
+    plt.show()
 
 
 if __name__ == "__main__":

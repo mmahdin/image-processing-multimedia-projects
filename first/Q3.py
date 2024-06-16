@@ -44,24 +44,24 @@ hist_B = cv2.calcHist([B], [0], None, [256], [0, 256])
 hist_total = cv2.calcHist([image_rgb], [0, 1, 2], None, [256, 256, 256], [0, 256, 0, 256, 0, 256])
 
 # Step 7: Plot histograms
-plt.figure(figsize=(15, 5))
+plt.figure(figsize=(12, 5))
 
-plt.subplot(1, 4, 1)
+plt.subplot(2, 2, 1)
 plt.plot(hist_R, color='r')
 plt.title('Red Channel Histogram')
 plt.xlim([0, 256])
 
-plt.subplot(1, 4, 2)
+plt.subplot(2, 2, 2)
 plt.plot(hist_G, color='g')
 plt.title('Green Channel Histogram')
 plt.xlim([0, 256])
 
-plt.subplot(1, 4, 3)
+plt.subplot(2, 2, 3)
 plt.plot(hist_B, color='b')
 plt.title('Blue Channel Histogram')
 plt.xlim([0, 256])
 
-plt.subplot(1, 4, 4)
+plt.subplot(2, 2, 4)
 plt.hist(image_rgb.ravel(), bins=256, color='black', alpha=0.5, label='Overall')
 plt.title('Overall Histogram')
 plt.xlim([0, 256])
@@ -91,6 +91,7 @@ plt.xlim([0, 256])
 # Step 4: Apply Histogram Equalization
 equalized_image = cv2.equalizeHist(image)
 
+
 # Step 5: Display the equalized image
 plt.subplot(2, 2, 3)
 plt.imshow(equalized_image, cmap='gray')
@@ -105,6 +106,28 @@ plt.plot(hist_equalized, color='black')
 plt.title('Histogram of Equalized Image')
 plt.xlim([0, 256])
 
+original_cumulative_histogram = np.cumsum(hist_orig)
+original_cumulative_histogram = original_cumulative_histogram / original_cumulative_histogram.max() * 255
+
+equalized_cumulative_histogram = np.cumsum(hist_equalized)
+equalized_cumulative_histogram = equalized_cumulative_histogram / equalized_cumulative_histogram.max() * 255
+
 plt.tight_layout()
 plt.show()
 
+plt.figure(figsize=(10, 7))
+
+plt.subplot(1, 2, 1)
+plt.title("Cumulative Grayscale Histogram of Original")
+plt.xlabel("Intensity Value")
+plt.ylabel("Cumulative Frequency")
+plt.plot(original_cumulative_histogram, color='r')
+
+plt.subplot(1, 2, 2)
+plt.title("Cumulative Grayscale Histogram of Equalized")
+plt.xlabel("Intensity Value")
+plt.ylabel("Cumulative Frequency")
+plt.plot(equalized_cumulative_histogram, color='g')
+
+plt.tight_layout()
+plt.show()
